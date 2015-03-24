@@ -6,8 +6,8 @@
 // for Adafruit Industries.
 // BSD license, all text above must be included in any redistribution.
 
-#include <Adafruit_GFX.h>   // Core graphics library
-#include <RGBmatrixPanel.h> // Hardware-specific library
+//#include <Adafruit_GFX.h>   // Core graphics library
+//#include <RGBmatrixPanel.h> // Hardware-specific library
 
 // If your 32x32 matrix has the SINGLE HEADER input,
 // use this pinout:
@@ -19,7 +19,7 @@
 #define C   A2
 #define D   A3
 
-RGBmatrixPanel matrix(A, B, C, D, CLK, LAT, OE, false);
+//RGBmatrixPanel matrix(A, B, C, D, CLK, LAT, OE, false);
 
 void setup() {
   
@@ -31,9 +31,9 @@ void setup() {
   uint16_t c;
 
   Serial.begin(9600);
-  matrix.begin();
+  //matrix.begin();
 
-  matrix.drawPixel(0, 7, 250);
+  //matrix.drawPixel(0, 7, 250);
   
   Serial.println('Hello, world');
   delay(100);
@@ -61,10 +61,27 @@ int* getColour(){
   return colour;
 }
 
+  char valx; 
+  int ledPin = 13; // Set the pin to digital I/O 13
+
+
+
 void loop() {
-  
+    digitalWrite(ledPin, LOW); // turn the LED on
+
  
   if (Serial.available() > 0) {
+    
+//    valx = Serial.read(); // read it and store it in val
+//    if (valx == '1') 
+//   { // If 1 was received
+//     digitalWrite(ledPin, LOW); // turn the LED on
+//   } else {
+//     digitalWrite(ledPin, HIGH); // otherwise turn it off
+//   }
+//   delay(10); // Wait 10 milliseconds for next reading
+    
+    
     
     // This gets incoming byte
     

@@ -20,8 +20,9 @@
     
     
     void setup() {
-    size(640, 320);
-    myPort = new Serial(this, Serial.list()[3], 9600);
+      println(Serial.list());
+      size(640, 320);
+    myPort = new Serial(this, Serial.list()[5], 9600);
   
      
     // Initialize columns and rows
@@ -37,11 +38,14 @@
     }
      
     void draw() {
-      
+      if (keyPressed == true){
+        myPort.write("1");
+      } else
+          myPort.write("0");
     video.loadPixels();
      
       // Begin loop for columns
-      for (int i = 0; i < cols; i++) {
+      for (int i = 0; i < cols; i++) {     
       // Begin loop for rows
      
         for (int j = 0; j < rows; j++) {
@@ -51,8 +55,19 @@
          
           // Looking up the appropriate color in the pixel array
           color c = video.pixels[i + j * video.width];
-          myPort.write(c);
-     
+          int a = (c >> 24) & 0xFF;
+          int r = (c >> 16) & 0xFF;  // Faster way of getting red(argb)
+          int g = (c >> 8) & 0xFF;   // Faster way of getting green(argb)
+          int b = c & 0xFF;          // Faster way of getting blue(argb)
+          
+          // 
+          
+          println(hex(c));
+          //myPort.write(g);
+          //String myColor="x,y,r,g,b,a";
+          //String myColor= x + "," +y;
+
+          myPort.write(g);
           fill(c);
           stroke(0);
           rect(x, y, videoScale, videoScale);
