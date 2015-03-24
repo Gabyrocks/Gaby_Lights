@@ -100,3 +100,41 @@ int rowLength = 32*16;
 
 int targetRow = getTargetRow(y);      
 boolean targetHigh = getTargetHigh(y);
+
+int baseAddr = targetRow*rowLength;
+for (int i=0; i<16; i++)
+{
+  int baseAddrCol = baseAddr+getTargetCol(x,i);
+  int bit = 1<<i;      
+
+  target[baseAddrCol]&= targetHigh?7:56; //zero target bits
+
+  if ((r & bit) != 0)
+    target[baseAddrCol]|=targetHigh?8:1;
+  if ((g & bit) != 0)
+    target[baseAddrCol]|=targetHigh?16:2;
+  if ((b & bit) != 0)
+    target[baseAddrCol]|=targetHigh?32:4;
+    }
+  return target;
+}
+
+int getTargetRow(int y)
+{
+  return y%16;
+}
+
+int getTargetCol(int x, int bit)
+{
+  return x+bit*32;
+}
+
+boolean getTargetHigh(int y)
+{
+  return y>=16;
+}
+
+
+
+
+
