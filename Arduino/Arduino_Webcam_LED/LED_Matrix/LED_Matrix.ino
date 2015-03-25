@@ -13,12 +13,13 @@ float bla;
 
 void setup(){
   
-  Serial.begin(57600); 
+  Serial.begin(115200); 
   matrix.begin();
  
 }
 int m;
 int counter =0;
+
 void loop(){
   counter++ %100;
   if(counter==1){

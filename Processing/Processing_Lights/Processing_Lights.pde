@@ -1,28 +1,21 @@
 
-    // Learning Processing
-    
-    // Daniel Shiffman
-    // http://www.learningprocessing.com
-    // Example 16-7: Video pixelation
     import processing.video.*;
     import processing.serial.*;
+    
     Serial myPort;
     
      
     // Size of each cell in the grid, ratio of window size to video size
-    int videoScale = 20;
-    // Number of columns and rows in our system
+    int videoScale = 10;
     int cols, rows;
-    // Variable to hold onto Capture object
     Capture video;
     PImage img;
     
     
     void setup() {
       println(Serial.list());
-      size(640, 320);
-    myPort = new Serial(this, Serial.list()[5], 57600);
-  
+      size(320, 160);
+      myPort = new Serial(this, Serial.list()[5], 115200);
      
     // Initialize columns and rows
     cols = width / videoScale;
@@ -41,7 +34,7 @@
 //        myPort.write("1");
 //      } else
 //          myPort.write("0");
-    video.loadPixels();
+    //video.loadPixels();
      
       // Begin loop for columns
       for (int i = 0; i < cols; i++) {     
@@ -60,16 +53,26 @@
           int b = c & 0xFF;          // Faster way of getting blue(argb)
           
           //g = int(map(g, 0,255,0,7));
-          println(g);
+          String toproc;
+          int mx = int(random(32));
+          int my = int(random(16));
+          int h = int(random(100));
+          int s = int(random(100));
+          int bl = int(random(100));
 
+          toproc = mx + ":" + my + ":" + h + ":" + s + ":" + bl + "\n";
+          
+          println(myPort.read());         
           myPort.write(g);
-          fill(c);
-          stroke(0);
-          rect(x, y, videoScale, videoScale);
+          
+          //fill(c);
+          //stroke(0);
+          //rect(x, y, videoScale, videoScale);
           
 //          img=video.get(0,0,640,320);
 //          image(img,0,0);
 
+          
           
        }    
      }
