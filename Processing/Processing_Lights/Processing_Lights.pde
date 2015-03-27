@@ -45,22 +45,28 @@ void draw() {
   Rectangle[] faces = opencv.detect();
   println(faces.length);
 
-  
 //// do cool stuff here:
     int x = int(random(32));
     int y = int(random(16));
-    int H = int(33);
-    int S = int(random(100));
-    int L = int(random(3));
+//    int H = int(222);
+//    int S = int(5);
+//    int L = int(random(3));
 ///// convert color to RGB before sending to arduino  
-    color c = Color.HSBtoRGB(H, S, L);
-    int R =  int(red(c));
-    int G =  int(green(c));
-    int B =  int(blue(c));
+//    color c = Color.HSBtoRGB(H, S, L);
     
-    int F = 0;   
-
+//    int R =  int(red(c));
+//    int G =  int(green(c));
+//    int B =  int(blue(c));
     
+    int R =  255;
+    int G = 0;
+     
+     
+     
+     
+    int B =  0;
+    
+    int F = 0;
     String toard = x + ":" + y + ":" + R + ":" + G + ":" + B + ":" + F +".";
     
     //println(toard);
