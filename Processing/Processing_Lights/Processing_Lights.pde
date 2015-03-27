@@ -10,7 +10,7 @@ int videoScale = 10;
 int cols, rows;
 Capture video;
 PImage img;
-    
+//    
 
 void setup() 
 {
@@ -54,30 +54,42 @@ void draw() {
 
     int x = int(random(32));
     int y = int(random(16));
-    int H = int(random(20,40));
+    int H = int(33);
     int S = int(random(100));
-    int L = int(random(100));
+    int L = int(random(3));
 
 ///// convert color to RGB before sending to arduino  
-
+    println(vr, vg,vb,va);
     color c = Color.HSBtoRGB(H, S, L);
-    int R = int(red(c));
-    int G = int(green(c));
-    int B = int(blue(c));
-    //println(B);
-    String toard = x + ":" + y + ":" + R + ":" + G + ":" + B + ".";
+    int R =  int(red(c));
+    int G =  int(green(c));
+    int B =  int(blue(c));
     
-    // send the string to the arduino over serial port
+    vr = int(map(vr, 0,255, 0,7));
+    
+    
+    
+    vg = int(map(vg, 0,255, 0,7));
+    vb = int(map(vb, 0,255, 0,7));
+    println(vr, vg,vb,va);
+
+    String toard = x + ":" + y + ":" + vr + ":" + vg + ":" + vb + ".";
+
+    //println(toard);
     myPort.write(toard);   
-    
+      
     // add some delay
-    //delay(40); 
+    delay(40); 
 
 //////////////////////////////////////////////////
 
     // listen back to the serial data from arduino
     // this is handy for debugging
+  
     while (myPort.available () > 0) {
+      
+          // send the string to the arduino over serial port
+         
       inByte = myPort.read();
       println(int(inByte));
 

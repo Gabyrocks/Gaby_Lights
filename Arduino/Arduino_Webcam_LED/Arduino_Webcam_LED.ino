@@ -1,26 +1,38 @@
 const char EOPmarker = '.';
 char serialbuf[32];
 
-#include <Adafruit_GFX.h>   // Core graphics library
+#include <Adafruit_GFX.h>
 #include <RGBmatrixPanel.h> // Hardware-specific library
 #define MAX_STRING_LEN 20
 #include <string.h>
 
-#define CLK 8  
+//#define CLK 8  
+//#define OE  9
+//#define LAT 10
+//#define A   A0
+//#define B   A1
+//#define C   A2
+//#define D   A3
+//
+//RGBmatrixPanel matrix(A, B, C, D, CLK, LAT, OE, false)
+
+#define CLK 8  // MUST be on PORTB! (Use pin 11 on Mega)
+#define LAT A3
 #define OE  9
-#define LAT 10
 #define A   A0
 #define B   A1
 #define C   A2
-#define D   A3
+RGBmatrixPanel matrix(A, B, C, CLK, LAT, OE, false);
 
-RGBmatrixPanel matrix(A, B, C, D, CLK, LAT, OE, false);
+uint8_t r=7, g=7, b=7;
 
 void setup() {
-  
+   
+
   Serial.begin(9600);
   matrix.begin();
-
+  pinMode(13, OUTPUT);
+  digitalWrite(13, LOW);
 }
 
 void loop() {
@@ -38,32 +50,35 @@ void loop() {
         serialbuf[bufpos] = 0; //restart the buff
         bufpos = 0; //restart the position of the buff
         
- //////////////////////////////////////////////////////////////////////////////////////////////
+
+ 
+      }
+      
+       //////////////////////////////////////////////////////////////////////////////////////////////
  // this is where we grab the x y HSB values and do whatever we thing is nice :) //////////////
-        
+               // send back to processing for debugging 
+  
          int x = atoi(subStr(serialbuf, ":", 1));
          int y = atoi(subStr(serialbuf, ":", 2));
          int R = atoi(subStr(serialbuf, ":", 3));
          int G = atoi(subStr(serialbuf, ":", 4));
          int B = atoi(subStr(serialbuf, ":", 5));
-
-         // send back to processing for debugging 
-        
-         Serial.write(x);
+          
+          Serial.write(x);
+      matrix.drawPixel(x, y, matrix.Color333(R, G, B));
+         
           // quick and dirty LED tester
-          if(x >= 16){
-            //matrix.drawPixel(x, y, matrix.Color333(R, G, B));
-            Serial.write(x);
-          } //else 
-          
-          //matrix.fillScreen(0);
-          
-          
-
-          
-      // all our stuff goes above here /////////////////////////////////////////////////
-      }
-       //Serial.flush();
+         
+//          if(x >= 16){
+//            digitalWrite(13, HIGH);
+//            
+//            //matrix.drawPixel(x, y, matrix.Color333(R, G, B));
+//            //Serial.write(x);
+//          } //else 
+//          //delay(100);
+//          //matrix.fillScreen(0);
+//      
+//       //Serial.flush();
     }
    
 }
