@@ -2,7 +2,6 @@ import gab.opencv.*;
 import java.awt.*;
 import processing.video.*;
 import processing.serial.*;
-// add java color library for HSB to RGB conversion
 import java.awt.Color;
 
 Capture video;
@@ -10,8 +9,6 @@ OpenCV opencv;
 
 Serial myPort;  // Create object from Serial class
 int inByte = -1;
-
-
 
 //    
 
@@ -30,8 +27,6 @@ void setup()
  
 }
 
-
-
 void draw() {
   
   scale(2);
@@ -45,38 +40,46 @@ void draw() {
   Rectangle[] faces = opencv.detect();
   println(faces.length);
 
-//// do cool stuff here:
+//  do cool stuff here:
+
     int x = int(random(32));
     int y = int(random(16));
-//    int H = int(222);
-//    int S = int(5);
-//    int L = int(random(3));
-///// convert color to RGB before sending to arduino  
+    int H = int(222);
+    int S = int(5);
+    int L = int(random(3));
+
+// convert color to RGB before sending to arduino  
 //    color c = Color.HSBtoRGB(H, S, L);
     
-//    int R =  int(red(c));
-//    int G =  int(green(c));
-//    int B =  int(blue(c));
+//  int R =  int(red(c));
+//  int G =  int(green(c));
+//  int B =  int(blue(c));
     
-    int R =  255;
-    int G = 0;
-     
-     
-     
-     
-    int B =  0;
+    int R =  int(random(255));
+    int G =  int(random(255));
+    int B =  int(random(255));
+
+
+//    int R =  255;
+//    int G = 0;
+//     
+//     for (int i = 0; i < faces.length; i++) {
+//      G =  faces[0].y ;
+//     } 
+//     
+//    int B =  0;
     
     int F = 0;
     String toard = x + ":" + y + ":" + R + ":" + G + ":" + B + ":" + F +".";
     
     //println(toard);
      myPort.write(toard);   
-      
-
      
-         // add some delay
-if (faces.length >= 1){
-  F = 1;
+// add some delay
+
+//if (faces.length >= 1){
+//  F = 1;
+  
   for (int i = 0; i < faces.length; i++) {
    // println(faces[i].x + "," + faces[i].y);
     rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
@@ -86,9 +89,8 @@ if (faces.length >= 1){
  
   } 
   
-} else { F = 0;}
-
-     
+//} else { F = 0;}
+    
     // listen back to the serial data from arduino
     // this is handy for debugging
       while (myPort.available () > 0) {

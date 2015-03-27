@@ -63,9 +63,15 @@ void loop() {
          int R = atoi(subStr(serialbuf, ":", 3));
          int G = atoi(subStr(serialbuf, ":", 4));
          int B = atoi(subStr(serialbuf, ":", 5));
+         int F = atoi(subStr(serialbuf, ":", 6));
+
+         
+         float vR = map(R, 0,255, 0,7);
+         float vG = map(G, 0,255, 0,7);
+         float vB = map(B, 0,255, 0,7);
           
           Serial.write(x);
-      matrix.drawPixel(x, y, matrix.Color333(R, G, B));
+      matrix.drawPixel(x, y, matrix.Color333(vR, vG, vB));
          
           // quick and dirty LED tester
          
@@ -77,10 +83,10 @@ void loop() {
 //          } //else 
 //          //delay(100);
 //          //matrix.fillScreen(0);
-//      
-//       //Serial.flush();
+
+
     }
-   
+  
 }
 
 
