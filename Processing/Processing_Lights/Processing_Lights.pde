@@ -75,19 +75,23 @@ void draw() {
     //println(toard);
      myPort.write(toard);   
      
-// add some delay
 
 //if (faces.length >= 1){
 //  F = 1;
+
+//////// UNDER CONSTRUCTION
   
   for (int i = 0; i < faces.length; i++) {
    // println(faces[i].x + "," + faces[i].y);
-    rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
-    delay(faces[0].x); 
+      rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+  
+      if (faces.length > i){
+       delay(faces[0].x); 
           toard = x + ":" + y + ":" + 0 + ":" + 0 + ":" + 0 + ".";
      myPort.write(toard);
  
-  } 
+     } 
+  }
   
 //} else { F = 0;}
     
