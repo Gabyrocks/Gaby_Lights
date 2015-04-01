@@ -7,10 +7,10 @@ import java.awt.Color;
 Capture video;
 OpenCV opencv;
 
-Serial myPort;  // Create object from Serial class
-int inByte = -1;
+// Create object from Serial class
 
-//    
+Serial myPort;  
+int inByte = -1; 
 
 void setup() 
 {
@@ -45,7 +45,7 @@ void draw() {
     int x = int(random(32));
     int y = int(random(16));
     int H = int(222);
-    int S = int(5);
+    int S = int(10);
     int L = int(random(3));
 
 // convert color to RGB before sending to arduino  
@@ -68,6 +68,8 @@ void draw() {
 //     } 
 //     
 //    int B =  0;
+
+
     
     int F = 0;
     String toard = x + ":" + y + ":" + R + ":" + G + ":" + B + ":" + F +".";
@@ -75,24 +77,26 @@ void draw() {
     //println(toard);
      myPort.write(toard);   
      
-
-//if (faces.length >= 1){
-//  F = 1;
+    
 
 //////// UNDER CONSTRUCTION
+
+
   
-  for (int i = 0; i < faces.length; i++) {
+  for (int i = 0; i < faces.length; i++){
    // println(faces[i].x + "," + faces[i].y);
-      rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
-  
-      if (faces.length > i){
-       delay(faces[0].x); 
-          toard = x + ":" + y + ":" + 0 + ":" + 0 + ":" + 0 + ".";
+     rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height); 
+     
+     toard = x + ":" + y + ":" + 0 + ":" + 0 + ":" + 0 + ".";
      myPort.write(toard);
- 
-     } 
-  }
+    
   
+if (faces.length == 0){
+    
+    delay(faces[0].x);
+    
+    }
+  }
 //} else { F = 0;}
     
     // listen back to the serial data from arduino
@@ -101,8 +105,7 @@ void draw() {
         // send the string to the arduino over serial port
         inByte = myPort.read();
         //println(int(inByte));
-    }
-  
+      }
  }
 
 
