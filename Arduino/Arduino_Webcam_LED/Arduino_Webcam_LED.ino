@@ -6,16 +6,6 @@ char serialbuf[32];
 #define MAX_STRING_LEN 20
 #include <string.h>
 
-//#define CLK 8  
-//#define OE  9
-//#define LAT 10
-//#define A   A0
-//#define B   A1
-//#define C   A2
-//#define D   A3
-//
-//RGBmatrixPanel matrix(A, B, C, D, CLK, LAT, OE, false)
-
 #define CLK 8  // MUST be on PORTB! (Use pin 11 on Mega)
 #define LAT A3
 #define OE  9
@@ -33,6 +23,7 @@ void setup() {
   matrix.begin();
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
+  
 }
 
 void loop() {
@@ -54,7 +45,6 @@ void loop() {
  
       }
       
-       //////////////////////////////////////////////////////////////////////////////////////////////
  // this is where we grab the x y HSB values and do whatever we thing is nice :) //////////////
                // send back to processing for debugging 
   
@@ -70,8 +60,8 @@ void loop() {
          float vG = map(G, 0,255, 0,7);
          float vB = map(B, 0,255, 0,7);
           
-          Serial.write(x);
-      matrix.drawPixel(x, y, matrix.Color333(vR, vG, vB));
+        Serial.write(x);
+        matrix.drawPixel(x, y, matrix.Color333(vR, vG, vB));
          
           // quick and dirty LED tester
          
@@ -100,9 +90,12 @@ char* subStr (char* input_string, char *separator, int segment_number) {
   for (i = 1, act = copy; i <= segment_number; i++, act = NULL) {
     sub = strtok_r(act, separator, &ptr);
     if (sub == NULL) break;
+    
   }
+  
  return sub;
+ 
 }
 
 
-/// note : need to add matrix
+
