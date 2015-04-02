@@ -72,30 +72,34 @@ void draw() {
 
     
     int F = 0;
-    String toard = x + ":" + y + ":" + R + ":" + G + ":" + B + ":" + F +".";
+    String toard = x + ":" + y + ":" + 0 + ":" + 0 + ":" + 0 + ":" + 0 +".";
     
     //println(toard);
      myPort.write(toard);   
      
-    
-
-//////// UNDER CONSTRUCTION
-
-
-  
+ 
   for (int i = 0; i < faces.length; i++){
+    if(faces.length > 1) {
+      for(int j = 0; j < (faces.length * 5); j++){
+        x = int(random(32));
+        y = int(random(16));
+        R =  int(random(255));
+        G =  int(random(255));
+        B =  int(random(255));
+        toard = x + ":" + y + ":" + R + ":" + G + ":" + B + ":" + F +".";
+       println(toard);
+       myPort.write(toard);
+      }
+    }
    // println(faces[i].x + "," + faces[i].y);
      rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height); 
-     
-     toard = x + ":" + y + ":" + 0 + ":" + 0 + ":" + 0 + ".";
+     delay(faces[0].x);
+     toard = x + ":" + y + ":" + R + ":" + G + ":" + B + ":" + F +".";
+     println(toard);
      myPort.write(toard);
+   
     
-  
-if (faces.length == 0){
-    
-    delay(faces[0].x);
-    
-    }
+   
   }
 //} else { F = 0;}
     

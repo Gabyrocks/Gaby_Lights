@@ -45,7 +45,7 @@ void loop() {
  
       }
       
- // this is where we grab the x y HSB values and do whatever we thing is nice :) //////////////
+ // this is where we grab the x y HSB values and do whatever we think is nice :) //////////////
                // send back to processing for debugging 
   
          int x = atoi(subStr(serialbuf, ":", 1));
