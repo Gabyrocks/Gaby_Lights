@@ -2,11 +2,11 @@ const char EOPmarker = '.';
 char serialbuf[32];
 
 #include <Adafruit_GFX.h>
-#include <RGBmatrixPanel.h> // Hardware-specific library
+#include <RGBmatrixPanel.h> 
 #define MAX_STRING_LEN 20
 #include <string.h>
 
-#define CLK 8  // MUST be on PORTB! (Use pin 11 on Mega)
+#define CLK 8
 #define LAT A3
 #define OE  9
 #define A   A0
@@ -28,17 +28,16 @@ void setup() {
 
 void loop() {
   
-    if (Serial.available() > 0) { //makes sure something is ready to be read
-      static int bufpos = 0; //starts the buffer back at the first position in the incoming serial.read
-      char inchar = Serial.read(); //assigns one byte (as serial.read()'s only input one byte at a time
-      if (inchar != EOPmarker) { //if the incoming character is not the byte that is the incoming package ender
-        serialbuf[bufpos] = inchar; //the buffer position in the array get assigned to the current read
-        bufpos++; //once that has happend the buffer advances, doing this over and over again until the end of package marker is read.
+    if (Serial.available() > 0) { 
+      static int bufpos = 0; 
+      char inchar = Serial.read(); 
+      if (inchar != EOPmarker) { 
+        serialbuf[bufpos] = inchar; 
+        bufpos++; 
         
-      }
-      
-      else { //once the end of package marker has been read
-        serialbuf[bufpos] = 0; //restart the buff
+      } else { 
+        
+        serialbuf[bufpos] = 0;
         bufpos = 0; //restart the position of the buff
         
 
@@ -63,17 +62,6 @@ void loop() {
         Serial.write(x);
         matrix.drawPixel(x, y, matrix.Color333(vR, vG, vB));
          
-          // quick and dirty LED tester
-         
-//          if(x >= 16){
-//            digitalWrite(13, HIGH);
-//            
-//            //matrix.drawPixel(x, y, matrix.Color333(R, G, B));
-//            //Serial.write(x);
-//          } //else 
-//          //delay(100);
-//          //matrix.fillScreen(0);
-
 
     }
   
