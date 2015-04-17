@@ -4,6 +4,7 @@ import processing.video.*;
 import processing.serial.*;
 import java.awt.Color;
 
+
 Capture video;
 OpenCV opencv;
 
@@ -39,6 +40,13 @@ void draw() {
   strokeWeight(3);
   Rectangle[] faces = opencv.detect();
   println(faces.length);
+  
+  int midFaceY = 0;
+  int midFaceX = 0;
+  
+  int midScreenY = (height/2);
+  int midScreenX = (width/2);
+  int midScreenWindow = 10;
 
 //  do cool stuff here:
 
@@ -65,7 +73,13 @@ void draw() {
   for (int i = 0; i < faces.length; i++){
     if(faces.length > 1) {
       for(int j = 0; j < (faces.length * 5); j++){
-        x = int(random(32));
+        if(faces.length > 0){
+        midFaceY = faces[0].y + (faces[0].height/2);
+        midFace = faces[0].x + (faces[0].width/2);
+        
+        if(midFaceY < (midScreenY - midScreenWindow)){
+      
+        x = int(random(16));
         y = int(random(16));
 //        R =  int(random(255));
 //        G =  int(random(255));
@@ -74,12 +88,18 @@ void draw() {
         S = int(random(222));
         L = int(random(222));
           
+          
+          
         toard = x + ":" + y + ":" + H + ":" + S + ":" + L + ":" + F +".";
        println(toard);
        myPort.write(toard);
+    
+          }
+        }
       }
     }
-    
+  }
+
    // println(faces[i].x + "," + faces[i].y);
      rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height); 
      delay(faces[0].x);
