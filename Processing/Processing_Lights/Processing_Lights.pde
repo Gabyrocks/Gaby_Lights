@@ -73,65 +73,65 @@ void draw() {
   int F = 0;
   String toard = x + ":" + y + ":" + 0 + ":" + 0 + ":" + 0 + ":" + 0 +".";
   myPort.write(toard);   
-
-for (int i = 0; i < faces.length; i++) {
   
-  midFaceY = faces[0].y + (faces[0].height/2);
-  midFaceX = faces[0].x + (faces[0].width/2);
-  
-  if(midFaceX > (midScreenX - midScreenWindow)) {
-    
-      
+    for (int i = 0; i < faces.length; i++){
+    if(faces.length > 1) {
+      for(int j = 0; j < (faces.length * 5); j++){
+        x = int(random(32));
+        y = int(random(16));
+//        R =  int(random(255));
+//        G =  int(random(255));
+//        B =  int(random(255));
+        H = int(random(222));
+        S = int(random(222));
+        L = int(random(222));
+
    
-
-    //  for (int i = 0; i < faces.length; i++){
-    //    if(faces.length > 1) {
-   
-    
-    for(int j = 0; j > (midScreenX * 5); j++){
+       toard = x + ":" + y + ":" + H + ":" + S + ":" + L + ":" + F +".";
+       println(toard);
+       myPort.write(toard);
     
       
-      
-
-      x = int(width/2);
-      
-      y = int(random(32));
-      //        R =  int(random(255));
-      //        G =  int(random(255));
-      //        B =  int(random(255));
-      H = int(random(222));
-      S = int(random(222));
-      L = int(random(222));
-
-
-
-      toard = x + ":" + y + ":" + H + ":" + S + ":" + L + ":" + F +".";
-      println(toard);
-      myPort.write(toard);
-    
-       //}
+        }
       }
-   }
+
+   // println(faces[i].x + "," + faces[i].y);
+     rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height); 
+     delay(faces[0].x);
+     toard = x + ":" + y + ":" + H + ":" + S + ":" + L + ":" + F +".";
+     println(toard);
+     myPort.write(toard);
     
-  // println(faces[i].x + "," + faces[i].y);
-  rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height); 
-  delay(faces[0].x);
-  toard = x + ":" + y + ":" + H + ":" + S + ":" + L + ":" + F +".";
-  println(toard);
-  myPort.write(toard);
-}
+     
+     //midFaceY = faces[0].y + (faces[0].height/2);
+     midFaceX = faces[0].x + (faces[0].width/2);
+     
+     if(midFaceY < (midScreenY - midScreenWindow)){
+       
+     x = int(10);
+     y = int(random(16));
+     
+    
+     toard = x + ":" + y + ":" + H + ":" + S + ":" + L + ":" + F +".";  
+     myPort.write(toard);
+     
+
+     }
+     
+    }
 
 
-while (myPort.available () > 0) {
-  // send the string to the arduino over serial port
-  inByte = myPort.read();
-  //println(int(inByte));
-  }
-}
+      while (myPort.available () > 0) {
+        // send the string to the arduino over serial port
+        inByte = myPort.read();
+        //println(int(inByte));
+      }
+ }
 
 
 void captureEvent(Capture c) {
   c.read();
 }
+
 
 
