@@ -56,7 +56,6 @@ void loop() {
     int S = atoi(subStr(serialbuf, ":", 4));
     int L = atoi(subStr(serialbuf, ":", 5));
     int F = atoi(subStr(serialbuf, ":", 6));
-    int G = atoi(subStr(serialbuf, ":", 7));
 
     float vH = map(H, 0, 222, 0, 7);
     float vS = map(S, 0, 222, 0, 7);
