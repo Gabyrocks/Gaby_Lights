@@ -12,7 +12,6 @@ OpenCV opencv;
 Serial myPort;  
 int inByte = -1; 
 
-
 int screen_width = 640;
 int screen_height = 480;
 int cam_width = screen_width/2;
@@ -45,7 +44,7 @@ void draw() {
   Rectangle[] faces = opencv.detect();
   println(faces.length);
 
-  // Define parameters for your arduino
+  // Define parameters for arduino
   int x = int(random(32));
   int y = int(random(16));
   int H = int(random(222));
@@ -68,23 +67,23 @@ void draw() {
         faceCount = 2;
       }
       //for faceCount *2 to increase amount of LEDs showing, do stuff
-      for (int j = 0; j < (faceCount * 2); j++) {
+      for (int j = 0; j < (faceCount * 1); j++) {
         x = int(random(32));
         y = int(random(16));
         H = int(random(222));
         //if not they're on the right (1 or more people)
         if ((midFaceX < cam_width/2)) {
           println("on the right");
-          H = int(random(0, 110));
-          L = int(random(0, 110));
-          S = int(random(0, 110));
+          H = int(random(0, 50));
+          S = int(random(0, 50));
+          L = int(random(0, 50));
         }
         //if not they're on the left (1 or more people)
         else {
           println("on the left");
-          H = int(random(111, 222));
-          L = int(random(111, 222));
-          S = int(random(111, 222));
+          H = int(random(51, 100));
+          S = int(random(51, 100));
+          L = int(random(40, 90));
         }
 
         toard = x + ":" + y + ":" + H + ":" + S + ":" + L + ":" + F +".";
