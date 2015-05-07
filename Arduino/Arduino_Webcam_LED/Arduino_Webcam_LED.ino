@@ -31,17 +31,24 @@ void setup() {
 void loop() {
 
   if (Serial.available() > 0) { 
+    // Gets serial ready to be read
     static int bufpos = 0; 
+    // Starts the buffer back at the first position in the incoming serial.read
     char inchar = Serial.read(); 
+    // assigns one byte at a time
     if (inchar != EOPmarker) { 
+      //if the incoming character is not the byte that is the incoming package ender
       serialbuf[bufpos] = inchar; 
+      //the buffer position in the array get assigned to the current read
       bufpos++; 
-
+      //once that has happend the buffer advances, doing this over and over again until the end of package marker is read.  
     } 
+
     else { 
 
+      // once the end of the package marker has been read, restart the position of the buff
       serialbuf[bufpos] = 0;
-      bufpos = 0; //restart the position of the buff
+      bufpos = 0; 
 
 
 
@@ -60,11 +67,11 @@ void loop() {
     float vH = map(H, 0, 222, 0, 7);
     float vS = map(S, 0, 222, 0, 7);
     float vL = map(L, 0, 222, 0, 7);
-    
+
 
     Serial.write(x);
     matrix.drawPixel(x, y, matrix.Color333(vH, vS, vL));
-    
+
 
 
   }
@@ -88,6 +95,7 @@ char* subStr (char* input_string, char *separator, int segment_number) {
   return sub;
 
 }
+
 
 
 
